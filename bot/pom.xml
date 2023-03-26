@@ -29,6 +29,13 @@
   <url>http://maven.apache.org</url>
 
   <dependencies>
+
+      <dependency>
+          <groupId>org.springdoc</groupId>
+          <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+          <version>2.0.2</version>
+      </dependency>
+
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-web</artifactId>
@@ -74,6 +81,32 @@
   
   <build>
 	  <plugins>
+          <plugin>
+              <groupId>org.openapitools</groupId>
+              <artifactId>openapi-generator-maven-plugin</artifactId>
+              <version>5.1.0</version>
+              <executions>
+                  <execution>
+                      <goals>
+                          <goal>generate</goal>
+                      </goals>
+                      <configuration>
+                          <inputSpec>
+                              ${project.basedir}/src/main/resources/bot.yml
+                          </inputSpec>
+                          <generatorName>spring</generatorName>
+                          <apiPackage>ru.tinkoff.edu.api</apiPackage>
+                          <modelPackage>ru.tinkoff.edu.model</modelPackage>
+                          <supportingFilesToGenerate>
+                              ApiUtil.java
+                          </supportingFilesToGenerate>
+                          <configOptions>
+                              <delegatePattern>true</delegatePattern>
+                          </configOptions>
+                      </configuration>
+                  </execution>
+              </executions>
+          </plugin>
           <plugin>
               <groupId>org.springframework.boot</groupId>
               <artifactId>spring-boot-maven-plugin</artifactId>
