@@ -8,22 +8,32 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import ru.tinkoff.edu.dto.AddLinkRequest;
 import ru.tinkoff.edu.dto.ApiErrorResponse;
-import ru.tinkoff.edu.dto.LinkUpdaterRequest;
+import ru.tinkoff.edu.dto.LinkResponse;
 
-@RequestMapping("/updates")
+@RequestMapping(value = "/tg-chat/{id}", consumes = "application/json", produces = "application/json")
 @RestController
-public class LinkUpdatesController {
+public class TgChatController {
 
+
+
+    @Operation(summary = "Зарегестрировать чат")
+    @PostMapping
     @ApiResponse(responseCode = "200", description = "Обновление обработано")
     @ApiResponse(responseCode = "400", description = "Некорректные параметры запроса")
-
-
-    @Operation(summary = "Отправить обновление")
-    @PostMapping(consumes = "application/json", produces = "application/json")
-    String updateLink(@RequestBody @Valid LinkUpdaterRequest request){
-        return  "some body ones told me...";
+    String addChat(@PathVariable("id") int id){
+        return  "add" + id;
     }
+
+    @Operation(summary = "Удалить чат")
+    @ApiResponse(responseCode = "200", description = "Обновление обработано")
+    @ApiResponse(responseCode = "400", description = "Некорректные параметры запроса")
+    @DeleteMapping
+    String deleteChat(@PathVariable("id") int id){
+        return  "delete" + id;
+    }
+
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
