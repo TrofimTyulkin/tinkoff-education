@@ -3,7 +3,7 @@ server:
 app:
   test: 123
   scheduler:
-    interval: 1
+    interval: 5000
 springdoc:
   api-docs:
     enabled: true
