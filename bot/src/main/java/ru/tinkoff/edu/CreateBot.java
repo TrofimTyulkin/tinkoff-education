@@ -6,6 +6,7 @@ import com.pengrad.telegrambot.request.SetMyCommands;
 
 
 public class CreateBot {
+    static TelegramBot bot;
     BotCommand[] commands = {
             new BotCommand("start", "зарегестрировать пользователя"),
             new BotCommand("help", "вывести окно с командами"),
@@ -14,13 +15,13 @@ public class CreateBot {
             new BotCommand("list", "показать список отслеживаемых ссылок")
     };
     CreateBot(String token){
-        /*
-        * git branch -m hw3
-git add .
-git commit -m "что-то"
-git push -u origin hw3*/
-        TelegramBot bot = new TelegramBot(token);
+        bot = new TelegramBot(token);
         bot.execute(new SetMyCommands(commands));
         bot.setUpdatesListener(new BotUpdater(bot));
     }
+
+    public static TelegramBot getBot(){
+        return bot;
+    }
+
 }

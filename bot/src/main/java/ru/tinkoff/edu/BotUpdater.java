@@ -9,6 +9,8 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.GetUpdatesResponse;
 
 import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 
 public class BotUpdater implements UpdatesListener {
@@ -24,7 +26,7 @@ public class BotUpdater implements UpdatesListener {
             updates.forEach(update ->{
 
                 String msg = update.message().text();
-                System.out.println(update.message().chat().username() + " " + msg);
+                System.out.println(update.message().chat().username() + " " + msg + update.message().chat().id());
 
 
                 if (msg == null) msg = "/help";
@@ -32,7 +34,6 @@ public class BotUpdater implements UpdatesListener {
                 switch (msg){
                     case "/start" -> {
                         start(update);
-                        bot.execute(new SendMessage(update.message().chat().id(), "start"));
                     }
                     case "/help" -> {
                         bot.execute(new SendMessage(update.message().chat().id(), "никто не поможет"));
@@ -72,9 +73,7 @@ public class BotUpdater implements UpdatesListener {
         }
 
         void start(Update update){
-
             bot.execute(new SendMessage(update.message().chat().id(), "зарегали команду старт"));
-
         }
 
     }

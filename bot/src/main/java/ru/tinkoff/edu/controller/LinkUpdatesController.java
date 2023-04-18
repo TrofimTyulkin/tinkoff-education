@@ -1,6 +1,8 @@
 package ru.tinkoff.edu.controller;
 
 
+import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.request.SendMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
@@ -8,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import ru.tinkoff.edu.CreateBot;
 import ru.tinkoff.edu.dto.ApiErrorResponse;
 import ru.tinkoff.edu.dto.LinkUpdaterRequest;
 
@@ -22,6 +25,10 @@ public class LinkUpdatesController {
     @Operation(summary = "Отправить обновление")
     @PostMapping(consumes = "application/json", produces = "application/json")
     String updateLink(@RequestBody @Valid LinkUpdaterRequest request){
+        TelegramBot bot = CreateBot.getBot();
+        for (Integer chatid : request.tgChatIds()) {
+            bot.execute(new SendMessage(chatid,"test"));
+        }
         return  "some body ones told me...";
     }
 
