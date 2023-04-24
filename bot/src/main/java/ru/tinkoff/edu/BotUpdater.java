@@ -7,8 +7,12 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.GetUpdates;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.GetUpdatesResponse;
+import org.springframework.http.MediaType;
+import org.springframework.web.reactive.function.client.WebClient;
+import ru.tinkoff.edu.client.ScrapperClient;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
@@ -17,6 +21,7 @@ public class BotUpdater implements UpdatesListener {
     String comand;
     TelegramBot bot;
     int updateid_fromComand = 0;
+    ScrapperClient client = new ScrapperClient();
     public BotUpdater (TelegramBot bot){
         this.bot = bot;
     }
@@ -56,6 +61,11 @@ public class BotUpdater implements UpdatesListener {
                         if (update.message().messageId() == updateid_fromComand + 2){
                             switch (comand){
                                 case "/track" -> {
+                                    try {
+                                        client.addLink(update.message().chat().id(), update.message().text());
+                                    } catch (URISyntaxException e) {
+                                        throw new RuntimeException(e);
+                                    }
                                     bot.execute(new SendMessage(update.message().chat().id(), "track"));
 
                                 }
@@ -73,6 +83,8 @@ public class BotUpdater implements UpdatesListener {
         }
 
         void start(Update update){
+
+            new ScrapperClient().addChat(update.message().chat().id());
             bot.execute(new SendMessage(update.message().chat().id(), "зарегали команду старт"));
         }
 
