@@ -1,5 +1,6 @@
 package ru.tinkoff.edu.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ru.tinkoff.edu.entity.Chat;
 import ru.tinkoff.edu.repository.ChatRepository;
@@ -7,6 +8,7 @@ import ru.tinkoff.edu.repository.ChatRepository;
 import java.util.List;
 
 public class JpaChatService {
+    @Autowired
     ChatRepository repository;
 
     @Transactional
