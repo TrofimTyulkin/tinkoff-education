@@ -14,6 +14,8 @@ import ru.tinkoff.edu.CreateBot;
 import ru.tinkoff.edu.dto.ApiErrorResponse;
 import ru.tinkoff.edu.dto.LinkUpdaterRequest;
 
+import java.util.Arrays;
+
 @RequestMapping("/updates")
 @RestController
 public class LinkUpdatesController {
@@ -26,8 +28,10 @@ public class LinkUpdatesController {
     @PostMapping(consumes = "application/json", produces = "application/json")
     String updateLink(@RequestBody @Valid LinkUpdaterRequest request){
         TelegramBot bot = CreateBot.getBot();
+        System.err.println(Arrays.toString(request.tgChatIds()));
         for (Integer chatid : request.tgChatIds()) {
-            bot.execute(new SendMessage(chatid,"test"));
+            bot.execute(new SendMessage(chatid, "По вашей ссылке  " + request.url() + " произошло обновление "
+                    + request.description()));
         }
         return  "some body ones told me...";
     }
