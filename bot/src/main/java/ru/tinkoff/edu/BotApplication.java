@@ -14,7 +14,6 @@ public static void main(String[] args) {
         var c = ctx.getBean("BOT", Bot.class);
         new CreateBot(c.getTest());
         System.out.println(c.getTest());
-//        new Bot();
         }
 
 }

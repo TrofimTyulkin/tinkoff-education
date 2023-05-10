@@ -21,7 +21,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: app.jar
-          path: target/ci-workshop.jar
+          path: target/scrapper-1.0.jar
 
   docker-build-push:
     runs-on: ubuntu-latest
