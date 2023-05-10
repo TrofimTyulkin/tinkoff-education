@@ -2,9 +2,8 @@ name: Scrapper CI
 
 on:
   push:
-    branches: [ "hw8" ]
-  pull_request:
-    branches: [ "main" ]
+    paths:
+      - 'scrapper/**'
 
 jobs:
   build:
