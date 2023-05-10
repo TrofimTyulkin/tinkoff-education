@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import ru.tinkoff.edu.dto.AddLinkRequest;
 import ru.tinkoff.edu.dto.LinkResponse;
 import ru.tinkoff.edu.dto.ListLinksResponse;
+import ru.tinkoff.edu.jdbc.JdbcChatService;
 import ru.tinkoff.edu.jdbc.JdbcLinkService;
 import ru.tinkoff.edu.jdbc.Link;
 
@@ -41,8 +42,9 @@ public class Consumer {
     }
 
     @RabbitListener(queues = "addChat")
-    public void addChat(String id) {
+    public void addChat(String id) throws SQLException {
         System.err.println("Message read from add : " + id);
+        new JdbcChatService().addChat(Integer.parseInt(id));
     }
     @RabbitListener(queues = "deleteChat")
     public void deleteChat(Long id) {
