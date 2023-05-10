@@ -26,10 +26,7 @@ public class Bot {
 
 
     public Bot() {
-        System.out.println("+++++++TOKEN " + test);
-//        bot = new TelegramBot("TOKEN");
-//        bot.execute(new SetMyCommands(commands));
-//        bot.setUpdatesListener(new BotUpdater(bot));
+
     }
 
 
