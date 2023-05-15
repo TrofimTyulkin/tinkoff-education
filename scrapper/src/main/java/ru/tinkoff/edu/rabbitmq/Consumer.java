@@ -19,7 +19,6 @@ import ru.tinkoff.edu.jdbc.JdbcChatService;
 import ru.tinkoff.edu.jdbc.JdbcLinkService;
 import ru.tinkoff.edu.jdbc.Link;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,7 +26,6 @@ import java.util.List;
 
 @Component
 public class Consumer {
-
     RabbitTemplate rabbitTemplate;
     public Consumer(){
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
@@ -97,9 +95,5 @@ public class Consumer {
         rabbitTemplate.convertAndSend("listResponse", message);
     }
 
-/*    @RabbitListener(queues = "myQueue")
-    public void listen(String in) {
-        System.err.println("Message read from myQueue : " + in);
-    }*/
 
 }
