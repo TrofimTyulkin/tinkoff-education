@@ -41,8 +41,6 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
-          distribution: 'temurin'
-          cache: maven
 
       - name: Build with Maven and check
         run: mvn -pl bot -am checkstyle:check

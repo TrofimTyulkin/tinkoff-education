@@ -22,16 +22,7 @@ public class ScrapperClient {
 
 
     public String addChat(Long id) {
-/*        WebClient client = WebClient.create();
-        String requestBody = "{\"name\":\"John\", \"age\":30}";
 
-        client.post()
-                .uri("https://example.com/api/endpoint")
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(requestBody)
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();*/
 
         return webClient.post().uri("/tg-chat/{id}", id)
                 .header("tg_chat_id", String.valueOf(id))
