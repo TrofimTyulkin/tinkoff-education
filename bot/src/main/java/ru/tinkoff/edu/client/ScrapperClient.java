@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.tinkoff.edu.dto.AddLinkRequest;
-import ru.tinkoff.edu.dto.LinkResponse;
 import ru.tinkoff.edu.dto.ScrapperResponse;
 
 import java.net.URI;
