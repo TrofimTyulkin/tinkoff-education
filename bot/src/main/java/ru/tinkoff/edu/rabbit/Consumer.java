@@ -10,7 +10,6 @@ import ru.tinkoff.edu.CreateBot;
 import ru.tinkoff.edu.dto.LinkUpdaterRequest;
 import ru.tinkoff.edu.dto.ListLinksResponse;
 
-import java.util.Arrays;
 
 @Component
 public class Consumer {
