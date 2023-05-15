@@ -10,19 +10,15 @@ import java.net.URI;
 import java.net.URISyntaxException;
 @RequiredArgsConstructor
 public class ScrapperClient {
-
-
-
+    
     private final WebClient webClient;
 
     public ScrapperClient() {
         String gitHubBaseUrl = "http://localhost:8081";
         this.webClient = WebClient.create(gitHubBaseUrl);
     }
-
-
+    
     public String addChat(Long id) {
-
 
         return webClient.post().uri("/tg-chat/{id}", id)
                 .header("tg_chat_id", String.valueOf(id))
