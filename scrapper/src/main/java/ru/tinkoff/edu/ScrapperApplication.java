@@ -9,6 +9,10 @@ import ru.tinkoff.edu.config.ApplicationConfig;
 import java.net.URISyntaxException;
 import java.sql.Timestamp;
 
+/**
+ * Hello world!
+ *
+ */
 @SpringBootApplication
 @EnableScheduling
 @EnableConfigurationProperties(ApplicationConfig.class)

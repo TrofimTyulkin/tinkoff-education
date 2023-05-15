@@ -46,7 +46,7 @@ public class JdbcLinkService implements LinkService {
                 updatetime = Timestamp.valueOf(
                         new GitHubClient().fetchRepo(str_url.split("/")[1], str_url.split("/")[2]).pushedAt()
                                 .atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
-            }catch (Exception e){
+            }catch (Exception ignored){
 
             }
 
@@ -56,8 +56,6 @@ public class JdbcLinkService implements LinkService {
         else if (str_url.contains("stackoverflow")) {
             System.err.println(new StackOverflowClient().fetchQuestion(Long.parseLong(str_url.split("/")[2])));
             System.err.println("SOW");
-        }else{
-
         }
 
         if (getLinkId(String.valueOf(url)) == 0){
@@ -101,7 +99,8 @@ public class JdbcLinkService implements LinkService {
                 System.err.println(a - System.currentTimeMillis());
                 System.err.println("rs = " + rs.getInt(1) + rs.getInt(2)
                         +  rs.getString(3) + rs.getTimestamp(4) + rs.getString(5));
-                links.add(new Link(rs.getInt(3), new URI(rs.getString(6)), rs.getTimestamp(4), rs.getTimestamp(5)));
+                links.add(new Link(rs.getInt(3), new URI(rs.getString(6)), 
+                rs.getTimestamp(4), rs.getTimestamp(5)));
             }
         statement.close();
         return  links;

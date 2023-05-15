@@ -30,10 +30,10 @@ public class Consumer {
 
     RabbitTemplate rabbitTemplate;
     public Consumer(){
-    RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
         this.rabbitTemplate = rabbitTemplate;
-}
+    }
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory("localhost");
         cachingConnectionFactory.setUsername("guest");
